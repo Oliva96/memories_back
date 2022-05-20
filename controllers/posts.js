@@ -15,7 +15,7 @@ export const getPost = async (req, res) => {
 export const getPosts = async (req, res) => {
   const { page } = req.query;
   try {
-    const limit = 2;
+    const limit = 8;
     const startIndex = (Number(page) - 1) * limit;
     const total = await PostMessage.countDocuments({});
 
@@ -23,7 +23,6 @@ export const getPosts = async (req, res) => {
       .sort({ _id: -1 })
       .limit(limit)
       .skip(startIndex);
-    // console.log(postMessages);
     res.status(200).json({
       data: posts,
       currentPage: Number(page),
